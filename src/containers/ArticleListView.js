@@ -18,7 +18,7 @@ class ArticleList extends React.Component {
         console.log("heroku akash")
     	if(localStorage.getItem('token') == null){
     		axios.get(
-        			'http://127.0.0.1:8000/blog/home_posts/'
+        			'https://byte-me-backend.herokuapp.com/blog/home_posts/'
         		)
             .then(res => {
             	this.setState({
