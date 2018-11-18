@@ -15,6 +15,7 @@ class ArticleList extends React.Component {
     	//console.log(localStorage.getItem('posts'));
     	//console.log("length"+this.state.articles.length);
     	const userId = localStorage.getItem('token');
+        console.log("heroku akash")
     	if(localStorage.getItem('token') == null){
     		axios.get(
         			'http://127.0.0.1:8000/blog/home_posts/'
