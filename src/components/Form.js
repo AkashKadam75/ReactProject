@@ -14,7 +14,7 @@ const buttonStyle = {
     width: '20%',
     height : '4.5%',
     position : 'absolute',
-    marginTop : '19%',
+    marginTop : '18%',
     marginRight : '38%',
     backgroundColor : '#606468',
     borderColor : '#606468',
