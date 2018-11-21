@@ -31,7 +31,7 @@ class ArticleDetail extends React.Component {
                 this.setState({
                     articles: res.data.posts
                 });
-                for (var i = 1; i < res.data.branch_count; i++) {
+                for (var i = 0; i < res.data.branch_count; i++) {
                      var postNumberObject = {branchIndex : i, firstPostId:this.state.articles[0].id};
                     this.state.branchTest.push(postNumberObject);
                 } 
