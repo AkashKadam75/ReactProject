@@ -8,7 +8,7 @@ import Articles from '../components/Article';
 import { List } from 'antd';
 import Followings from "../components/Followings";
 import Followers from "../components/User_followers";
-import { Row, Col } from 'antd';
+import { Row, Col,Icon,Avatar } from 'antd';
 import User_name from "../components/user_name";
 import PostCount from '../components/post_count';
 
@@ -68,6 +68,12 @@ const article_style = {
     marginTop: '20%'
 }
 
+const IconText = ({ type, text }) => (
+  <span>
+    <Icon type={type} style={{ marginRight: 8 }} />
+    {text}
+  </span>
+);
 
 class ProfileView extends React.Component {
 
@@ -108,7 +114,31 @@ class ProfileView extends React.Component {
                 <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }} style={following_no_style}><Followers data={this.state.followers}/></Col>
                 <div style={post_count_style}>Posts</div>
                 <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={post_count_no_style}><PostCount data={this.state.post}/></Col>
-                <div style={article_style}><Articles data={this.state.post}/></div>
+                <div style={article_style}>
+                <List
+
+                    itemLayout="vertical"
+                    size="large"
+                    grid={{ gutter: 16, column: 1 }}
+                    dataSource={this.state.post}
+                    renderItem={item => (
+                        <List.Item
+                            key={item.title}
+                            actions={[<IconText type="star-o" text="156"/>]}
+                            style={{ background: '#ECECEC', padding: '30px',alignItems: 'center'}}
+                        >
+                            <List.Item.Meta
+                                avatar={<Avatar src="http://www.sticomputer.com/newwebsite/wp-content/uploads/2018/03/Blog-Post-Icon-Navy-Blue-100x100.jpg"/>}
+                                //title={<a href={`/branch/${item.id}`}>{item.title}</a>}
+                                description={item.user_id}
+                            />
+                            {item.content}
+                        </List.Item>
+
+                    )}
+
+                />
+                </div>
             </Row>
 
         )
