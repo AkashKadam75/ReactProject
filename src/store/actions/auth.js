@@ -42,7 +42,7 @@ export const checkAuthTimeout = expirationTime => {
 export const authLogin = (username, password) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('http://127.0.0.1:8000/login/', 
+        axios.post('https://byte-me-backend.herokuapp.com/login/', 
         {
             username: username,
             password: password
@@ -50,9 +50,10 @@ export const authLogin = (username, password) => {
         .then(res => {
             const token = res.data.user_id;
             const posts = res.data.posts;
-            console.log(JSON.stringify(posts));
+            const userName  = res.data.username;
             const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
             localStorage.setItem('token', token);
+            localStorage.setItem('userName', userName);
             localStorage.setItem('expirationDate', expirationDate);
             localStorage.setItem('posts', JSON.stringify(posts));
             dispatch(authSuccess(token));
@@ -68,7 +69,7 @@ export const authLogin = (username, password) => {
 export const authSignup = (username, email, password1, password2, firstName, lastName) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('http://127.0.0.1:8000/signup/', {
+        axios.post('https://byte-me-backend.herokuapp.com/signup/', {
             username: username,
             email: email,
             password1: password1,

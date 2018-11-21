@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Articles from '../components/Article';
 import CustomForm from '../components/Form';
-
+import Categories from '../components/Categories'
 class ArticleList extends React.Component {
 
     state = {
@@ -15,7 +15,6 @@ class ArticleList extends React.Component {
     	//console.log(localStorage.getItem('posts'));
     	//console.log("length"+this.state.articles.length);
     	const userId = localStorage.getItem('token');
-        console.log("heroku akash")
     	if(localStorage.getItem('token') == null){
     		axios.get(
         			'https://byte-me-backend.herokuapp.com/blog/home_posts/'
@@ -28,7 +27,7 @@ class ArticleList extends React.Component {
     		});
     	}else{
     		axios.get(
-        			'http://127.0.0.1:8000/blog/user_home_posts/',
+        			'https://byte-me-backend.herokuapp.com/blog/user_home_posts/',
         			{
         				params:{
         					user_id : userId
@@ -36,8 +35,9 @@ class ArticleList extends React.Component {
         			}
         		)
     		.then(res => {
-    			console.log(res.data.posts_new.title)
-    			if(Object.getOwnPropertyNames(res.data.posts_new).length > 0){
+    			console.log(res.data.posts_new);
+    			if(res.data.posts_new != null && Object.getOwnPropertyNames(res.data.posts_new).length > 0){
+
     				this.state.streamers.push(res.data.posts_new)
     			}
     			res.data.posts.map(post =>{
@@ -55,19 +55,21 @@ class ArticleList extends React.Component {
     	if(localStorage.getItem('token') == null){
     		return (
 	            <div>
+	            	<Categories/>
+	            	<br />
 	                <Articles data={this.state.articles} />
 	            </div>
 	        )
     	}else{
     		return (
 	            <div>
+	            	<Categories/>
+	            	<br />
+	            	<CustomForm />
+	            	<br />
 	                <Articles data={this.state.articles} />
-	                <br />
-	                <h2>Create an article</h2>
-	                <CustomForm 
-	                    requestType="post"
-	                    articleID={null}
-	                    btnText="Create" />
+	                
+	                
 	            </div>
         	)
     	}
